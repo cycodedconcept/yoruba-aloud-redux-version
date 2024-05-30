@@ -17,19 +17,19 @@ const Login = () => {
                 <form className='form-sec'>
                     <h2 className='text-center mb-5'>Login</h2>
 
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" placeholder='Enter email here'/>
+                    <div className="mb-3">
+                        <label for="exampleInputEmail1" className="form-label">Email address</label>
+                        <input type="email" className="form-control" placeholder='Enter email here'/>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" placeholder='Enter password here'/>
+                    <div className="mb-3">
+                        <label for="exampleInputPassword1" className="form-label">Password</label>
+                        <input type="password" className="form-control" placeholder='Enter password here'/>
                     </div>
-                    <button type="submit" class="log-btn">
+                    <button type="submit" className="log-btn">
                         {
                             spin ?(
-                                <div class="spinner-border spinner-border-sm text-light" role="status">
-                                    <span class="sr-only"></span>
+                                <div className="spinner-border spinner-border-sm text-light" role="status">
+                                    <span className="sr-only"></span>
                                 </div>
                             ): (
                                 'Login'

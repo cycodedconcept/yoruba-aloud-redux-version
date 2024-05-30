@@ -1,10 +1,10 @@
 // src/store.js
 import { configureStore } from '@reduxjs/toolkit';
-import sliceReducer from '../features/slice'
+import formRegisterReducer from '../features/registerSlice';
 
 const store = configureStore({
   reducer: {
-    example: sliceReducer,
+    form: formRegisterReducer,
   },
 });
 
