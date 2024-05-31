@@ -8,24 +8,24 @@ import './style.css'
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { name, email, password, password_confirmation, spinItem, error, success } = useSelector((state) => state.form);
+  const { name, email, password, password_confirmation, spinItem, error, success } = useSelector((state) => state.register);
 
-const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(setRegisterFormData({ field: name, value }));
-};
+  };
 
-const handleRegister = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     const formData = { name, email, password, password_confirmation };
     dispatch(submitForm(formData));
-};
+  };
 
-useEffect(() => {
+  useEffect(() => {
     if (success) {
       navigate('/');
     }
-}, [success, navigate]);
+  }, [success, navigate]);
 
   return (
     <div>

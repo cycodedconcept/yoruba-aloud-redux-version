@@ -1,4 +1,3 @@
-// src/features/formSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -13,9 +12,8 @@ const initialState = {
   data: []
 };
 
-// Create the async thunk for form submission
 export const submitForm = createAsyncThunk(
-  'form/submitForm',
+  'register',
   async (formData, { rejectWithValue }) => {
     try {
       const response = await axios.post('https://accosmart.com.ng/yorubalearning/api/register_admin', formData);
@@ -27,7 +25,7 @@ export const submitForm = createAsyncThunk(
 );
 
 const formRegisterSlice = createSlice({
-  name: 'form',
+  name: 'register',
   initialState,
   reducers: {
     setRegisterFormData: (state, action) => {
@@ -36,19 +34,19 @@ const formRegisterSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(submitForm.pending, (state) => {
+    .addCase(submitForm.pending, (state) => {
         state.spinItem = true;
         state.error = null;
-      })
-      .addCase(submitForm.fulfilled, (state, action) => {
+    })
+    .addCase(submitForm.fulfilled, (state, action) => {
         state.spinItem = false;
         state.success = true;
         state.data = action.payload
-      })
-      .addCase(submitForm.rejected, (state, action) => {
+    })
+    .addCase(submitForm.rejected, (state, action) => {
         state.spinItem = false;
         state.error = action.payload;
-      });
+    });
   },
 });
 
