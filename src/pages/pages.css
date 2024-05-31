@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Short+Stack&display=swap');
+
+.sidebar-menu button {
+    display: block;
+    outline: none;
+    border: 0;
+    box-shadow: none;
+    background: #2D85DE;
+    font-size: 18px;
+    color: #fff;
+    width: 100%;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.sidebar-menu button i {
+    font-size: 25px;
+}
+
+.sidebar {
+    background: #2D85DE;
+    width: 345px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    /* background-color: #2D85DE !important; */
+    z-index: 100;
+    transition: width 300ms;
+}
+
+.sidebar-menu {
+    padding: 20px 0 0;
+}
+
+.sidebar-menu button.active {
+    background: #fff;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: var(--main-color);
+    border-radius: 30px 0 0 30px;
+}
