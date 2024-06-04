@@ -15,6 +15,7 @@ export const submitForm = createAsyncThunk(
     async (formData, { rejectWithValue}) => {
         try {
             const response = await axios.post('https://accosmart.com.ng/yorubalearning/api/admin_login', formData);
+            localStorage.setItem("key", response.data.token);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);
