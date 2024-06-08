@@ -1,54 +1,72 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialState = {
-    error: null,
-    success: 'idle',
-    data: {}
-};
-
-
-
-export const dashboardItem = createAsyncThunk(
-    'dashboard',
-    async ({ token, customHeaders, rejectWithValue }) => {
-        try {
-            const response = await axios.get('https://accosmart.com.ng/yorubalearning/api/admin/admin_dashboardapi', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    ...customHeaders,
-                },
-            });
-            return response.data;
-        }catch (error) {
-            return rejectWithValue(error.response.data);
-        }
-    }
+export const fetchDashboardData = createAsyncThunk(
+  'api/fetchDashboardData',
+  async ({ token, customHeaders }) => {
+    const response = await axios.get('https://accosmart.com.ng/yorubalearning/api/admin/admin_dashboardapi', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ...customHeaders,
+      },
+    });
+    return response.data;
+  }
 );
 
-const dashboardSlice = createSlice({
-    name: 'dashboard',
-    initialState,
-    reducers: {
-        setDashboard: (state, action) => {
-            state[action.payload.field] = action.payload.value;
-        }
-    },
-    extraReducers: (builder) => {
-        builder
-        .addCase(dashboardItem.pending, (state) => {
-            state.error = null
-        })
-        .addCase(dashboardItem.fulfilled, (state, action) => {
-            state.success = 'succeeded';
-            state.data = action.payload;
-        })
-        .addCase(dashboardItem.rejected, (state, action) => {
-            state.success = 'failed';
-            state.error = action.payload;
-        });
-    }
-})
+// Second API call
+export const fetchTopThreeData = createAsyncThunk(
+  'api/fetchTopThreeData',
+  async ({ token, customHeaders }) => {
+    const response = await axios.get('https://accosmart.com.ng/yorubalearning/api/admin/top_three_students', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ...customHeaders,
+      },
+    });
+    return response.data;
+  }
+);
 
-export const { setDashboard } = dashboardSlice.actions;
-export default dashboardSlice.reducer;
+const apiSlice = createSlice({
+  name: 'api',
+  initialState: {
+    dashboardData: {},
+    topThreeData: [],
+    dashboardStatus: 'idle',
+    topThreeStatus: 'idle',
+    mode: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchDashboardData.pending, (state) => {
+        state.dashboardStatus = 'loading';
+      })
+      .addCase(fetchDashboardData.fulfilled, (state, action) => {
+        state.dashboardStatus = 'succeeded';
+        state.dashboardData = action.payload;
+      })
+      .addCase(fetchDashboardData.rejected, (state, action) => {
+        state.dashboardStatus = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(fetchTopThreeData.pending, (state) => {
+        state.topThreeStatus = 'loading';
+        state.mode = false;
+      })
+      .addCase(fetchTopThreeData.fulfilled, (state, action) => {
+        state.topThreeStatus = 'succeeded';
+        state.topThreeData = action.payload;
+        state.mode = false;
+      })
+      .addCase(fetchTopThreeData.rejected, (state, action) => {
+        state.topThreeStatus = 'failed';
+        state.error = action.error.message;
+        state.mode = false;
+      });
+  },
+});
+
+export default apiSlice.reducer;

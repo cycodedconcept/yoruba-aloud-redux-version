@@ -364,7 +364,7 @@ table td {
 
 
 .mymodal {
-    display: none;
+    /* display: none; */
     position: fixed;
     z-index: 1;
     left: 0;
@@ -377,7 +377,7 @@ table td {
   
 .modal-content {
     margin: 10% auto;
-    width: 40%;
+    width: 100%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     animation-name: modalopen;
     animation-duration: 2s;
@@ -485,7 +485,7 @@ table td {
 } */
 
 
-@media screen and (max-width: 850px) {
+/* @media screen and (max-width: 850px) {
     .subItems {
         flex-direction: column;
     }
@@ -771,7 +771,7 @@ hr {
 }
 
 /* loader */
-.preloader {
+/*.preloader {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -835,4 +835,46 @@ hr {
 
 .mim {
     width: 5%;
+} */
+
+.dash-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 3rem;
+}
+  
+.card-single {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.card-body {
+    padding: 1.50rem !important;
+}
+
+.top-three {
+    outline: none;
+    box-shadow: none;
+    border: 0;
+    background-color: #2D85DE;
+    color: #fff;
+    padding: 20px 15px;
+    border-radius: 10px;
+    margin: 10px 5px;
+}
+
+.student-card {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.swichItem {
+    float: right;
 }

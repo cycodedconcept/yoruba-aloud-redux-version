@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <div>
       <Sidebar />
-      <div className="main-content">
+      <div className="main-content mt-5 p-3">
           <header>
               <i className="las la-bars"></i>
           </header>
