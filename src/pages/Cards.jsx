@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDashboardData, fetchTopThreeData } from '../features/dashboardSlice';
+import { fetchDashboardData, fetchTopThreeData, fetchAllStudents } from '../features/dashboardSlice';
 import './pages.css';
 
 const Cards = () => {
   const dispatch = useDispatch();
+  const [modalVisible, setModalVisible] = useState(false)
   
-  const { dashboardData, topThreeData, dashboardStatus, topThreeStatus, error, mode } = useSelector((state) => state.api);
+  const { dashboardData, topThreeData, dashboardStatus, topThreeStatus, allStudentsData, allStudentStatus, error } = useSelector((state) => state.api);
 
   useEffect(() => {
     const token = localStorage.getItem('key');
@@ -21,7 +22,19 @@ const Cards = () => {
     if (topThreeStatus === 'idle') {
       dispatch(fetchTopThreeData({ token, customHeaders }));
     }
-  }, [dashboardStatus, topThreeStatus, dispatch]);
+
+    if (allStudentStatus === 'idle') {
+      dispatch(fetchAllStudents({ token, customHeaders }));
+    }
+  }, [dashboardStatus, topThreeStatus, allStudentStatus, dispatch]);
+
+  const showTheModal = () => {
+    setModalVisible(true);
+  }
+
+  const hideModal = () => {
+    setModalVisible(false)
+  }
 
   const cardItem = [
     {
@@ -56,7 +69,7 @@ const Cards = () => {
     },
     {
       id: 5,
-      content: <button className="top-three">Top three Students</button>,
+      content: <button className="top-three" onClick={ showTheModal }>Top three Students</button>,
     },
   ];
 
@@ -82,6 +95,16 @@ const Cards = () => {
     </div>
   )
 
+  const tableItem = allStudentsData.map((item) => 
+    <tr key={item.id}>
+      <td>{item.name}</td>
+      <td>{item.email}</td>
+      <td>{item.phone_number}</td>
+      <td>{item.position}</td>
+      <td>{item.total_score}</td>
+    </tr>
+  )
+
   return (
     <React.Fragment>
       {dashboardStatus === 'failed' && <p>Error: {error}</p>}
@@ -93,12 +116,12 @@ const Cards = () => {
         )}
       </div>
       {topThreeStatus === 'failed' && <p>Error: {error}</p>}
-      {mode ? (
+      {modalVisible ? (
         <div id="dash-modal" className="mymodal">
           <div className="modal-content">
             <div className="modal-header">
               <h2>Top three students</h2>
-              <span className="close">&times;</span>
+              <span className="close" onClick={ hideModal }>&times;</span>
             </div>
             <div className="modal-body">
               { topItem }
@@ -107,6 +130,23 @@ const Cards = () => {
         </div>
       ):('')
     }
+
+      <div className="outer-wrapper mt-5">
+          <div className="table-wrapper">
+              <table className="table">
+                  <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Phone Number</th>
+                          <th>Position</th>
+                          <th>Total score</th>
+                      </tr>
+                  </thead>
+                  <tbody>{tableItem}</tbody>
+              </table>
+          </div>
+      </div>
     </React.Fragment>
   );
 };
