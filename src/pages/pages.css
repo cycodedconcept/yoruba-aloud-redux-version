@@ -326,7 +326,7 @@ table td {
 .scroll-bg {
     margin: 10% auto;
     padding: 20px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: rgba(62, 62, 64, 0.2) 0px 7px 29px 0px;
     border-radius: 20px;
 }
 .scroll-div {
@@ -878,4 +878,40 @@ hr {
 
 .swichItem {
     float: right;
+}
+
+form {
+    width: 70%;
+    margin: 5% auto;
+    background: transparent;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+input, input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #F4F5F6;
+    width: 100%;
+}
+
+.button-blue {
+    width: 100%;
+    background-color: #2D85DE;
+    color: #ffffff;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: none;
+    padding: 10px;
+    border: none;
+    font-family: "Short Stack", sans-serif;
+}
+
+::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 14px;
 }

@@ -5,7 +5,7 @@ import './pages.css';
 
 const Cards = () => {
   const dispatch = useDispatch();
-  const [modalVisible, setModalVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
   
   const { dashboardData, topThreeData, dashboardStatus, topThreeStatus, allStudentsData, allStudentStatus, error } = useSelector((state) => state.api);
 
@@ -87,11 +87,11 @@ const Cards = () => {
 
   const topItem = topThreeData.map((item) => 
     <div className="student-card" key={item.id}>
-      <p><span className="clent">Name</span>: <span className="swichItem">${item.name}</span></p>
-      <p><span className="clent">Email</span>: <span className="swichItem">${item.email}</span></p>
-      <p><span className="clent">Phone</span>: <span className="swichItem">${item.phone_number}</span></p>
-      <p><span className="clent">Position</span>: <span className="swichItem">${item.position}</span></p>
-      <p><span className="clent">Score</span>: <span className="swichItem">${item.total_score}</span></p>
+      <p><span className="clent">Name</span>: <span className="swichItem">{item.name}</span></p>
+      <p><span className="clent">Email</span>: <span className="swichItem">{item.email}</span></p>
+      <p><span className="clent">Phone</span>: <span className="swichItem">{item.phone_number}</span></p>
+      <p><span className="clent">Position</span>: <span className="swichItem">{item.position}</span></p>
+      <p><span className="clent">Score</span>: <span className="swichItem">{item.total_score}</span></p>
     </div>
   )
 
@@ -131,22 +131,23 @@ const Cards = () => {
       ):('')
     }
 
-      <div className="outer-wrapper mt-5">
-          <div className="table-wrapper">
-              <table className="table">
-                  <thead>
-                      <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Phone Number</th>
-                          <th>Position</th>
-                          <th>Total score</th>
-                      </tr>
-                  </thead>
-                  <tbody>{tableItem}</tbody>
-              </table>
-          </div>
-      </div>
+    <div className="outer-wrapper mt-5">
+        <div className="table-wrapper">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Position</th>
+                <th>Total score</th>
+              </tr>
+            </thead>
+            <tbody>{tableItem}</tbody>
+          </table>
+        </div>
+    </div>
+      
     </React.Fragment>
   );
 };

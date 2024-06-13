@@ -1,44 +1,44 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './pages.css'
 
-const Sidebar = () => {
+const Sidebar = ({ onButtonClick, activeContent }) => {
     const buttonItems = [
         {
             id: 0,
             name: 'Dashboard',
-            las: 'lar la-chart-bar px-3'
+            las: 'lar la-chart-bar px-3',
+            bname: 'dashboard'
         },
         {
             id: 1,
             name: 'Categories',
-            las: 'las la-layer-group px-3'
+            las: 'las la-layer-group px-3',
+            bname: 'categories'
         },
         {
             id: 2,
             name: 'Learning Materials',
-            las: 'las la-file-upload px-3'
+            las: 'las la-file-upload px-3',
+            bname: 'learning'
         },
         {
             id: 3,
             name: 'Quiz',
-            las: 'las la-file-upload px-3'
+            las: 'las la-file-upload px-3',
+            bname: 'quiz'
         },
         {
             id: 4,
             name: 'Admin',
-            las: 'las la-user px-3'
+            las: 'las la-user px-3',
+            bname: 'admin'
         },
     ]
-    const [active, setActive] = useState(buttonItems[0].id);
-    
 
-    const handleClick = (id) => {
-        setActive(id);
-    };
     
 
     const showMenu = buttonItems.map((item) => { 
-        return <button key={item.id} className={active === item.id ? 'sidebar-menu button active': 'sidebar-menu button'} onClick={() => handleClick(item.id)}>
+        return <button key={item.id} className={activeContent === item.bname ? 'sidebar-menu button active': 'sidebar-menu button'} onClick={() => onButtonClick(item.bname)}>
         <i className={item.las} style={{color: '#b6cc00'}} ></i>
         {item.name}
         </button>

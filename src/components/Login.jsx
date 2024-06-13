@@ -42,7 +42,7 @@ const Login = () => {
                         <input type="email" className="form-control" placeholder='Enter email here' name='email' value={email} onChange={handleChange}/>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                         <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                         <input type="password" className="form-control" placeholder='Enter password here' name='password' value={password} onChange={handleChange}/>
                     </div>
                     <button type="submit" className="log-btn">
