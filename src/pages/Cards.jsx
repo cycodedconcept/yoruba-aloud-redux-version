@@ -117,13 +117,16 @@ const Cards = () => {
       </div>
       {topThreeStatus === 'failed' && <p>Error: {error}</p>}
       {modalVisible ? (
-        <div id="dash-modal" className="mymodal">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h2>Top three students</h2>
-              <span className="close" onClick={ hideModal }>&times;</span>
+        <div className="modal-overlay">
+          <div className="modal-content2">
+            <div className="head-mode">
+              <h3>Top three students</h3>
+              <button className="modal-close" onClick={hideModal}>
+                &times;
+              </button>
             </div>
-            <div className="modal-body">
+          
+            <div className="modal-body mt-3">
               { topItem }
             </div>
           </div>
