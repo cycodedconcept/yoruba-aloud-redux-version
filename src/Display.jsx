@@ -8,11 +8,11 @@ const Display = () => {
   return (
     <React.Fragment>
       <BrowserRouter>
-            <Routes>
-                <Route index element={<Login />} />
-                <Route path='register' element={<Register />} />
-                <Route path='dashboard' element={<Dashboard />} />
-            </Routes>
+        <Routes>
+          <Route index element={<Login />} />
+          <Route path='register' element={<Register />} />
+          <Route path='dashboard' element={<Dashboard />} />
+        </Routes>
       </BrowserRouter>
     </React.Fragment>
   )

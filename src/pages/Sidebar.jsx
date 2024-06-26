@@ -35,10 +35,12 @@ const Sidebar = ({ onButtonClick, activeContent }) => {
         },
     ]
 
-    
 
     const showMenu = buttonItems.map((item) => { 
-        return <button key={item.id} className={activeContent === item.bname ? 'sidebar-menu button active': 'sidebar-menu button'} onClick={() => onButtonClick(item.bname)}>
+        return <button key={item.id} className={activeContent === item.bname ? 'sidebar-menu button active': 'sidebar-menu button'} onClick={() => {
+            console.log(item.bname)
+            onButtonClick(item.bname)
+        }}>
         <i className={item.las} style={{color: '#b6cc00'}} ></i>
         {item.name}
         </button>

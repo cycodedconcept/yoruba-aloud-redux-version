@@ -72,7 +72,6 @@ export const updateCategory = createAsyncThunk(
   'category/updateCategory',
   async ({ formData, category_id, token, customHeaders }, { rejectWithValue }) => {
     try {
-      // Add category_id to formData
       formData.append('category_id', category_id);
       const response = await axios.post(
         `https://accosmart.com.ng/yorubalearning/api/admin/update_category`, 
@@ -94,6 +93,32 @@ export const updateCategory = createAsyncThunk(
   }
 );
 
+export const createSubcategory = createAsyncThunk(
+  'category/createSubcategory',
+  async ({ formData, category_id, token, customHeaders }, { rejectWithValue }) => {
+    try {
+      formData.append('category_id', category_id);
+      const response = await axios.post(
+        'https://accosmart.com.ng/yorubalearning/api/admin/create_subcategory',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            ...customHeaders
+          },
+        }
+      );
+      return response.data;
+    }
+    catch(error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 
 const catSlice = createSlice({
   name: 'cat',
@@ -101,11 +126,13 @@ const catSlice = createSlice({
     name: '',
     image: '',
     categoryData: {},
+    subCategoryData: {},
     getCategoryData: [],
     categoryStatus: 'idle',
     getCategoryStatus: 'idle',
     deleteCategoryStatus: 'idle',
     updateCategoryStatus: 'idle',
+    subCategoryStatus: 'idle',
     spinItem: false,
     error: null,
   },
@@ -164,7 +191,21 @@ const catSlice = createSlice({
         state.updateCategoryStatus = 'failed';
         state.error = action.error.message;
         state.spinItem = false;
-      });
+      })
+      .addCase(createSubcategory.pending, (state) => {
+        state.subCategoryStatus = 'loading';
+        state.spinItem = true;
+      })
+      .addCase(createSubcategory.fulfilled, (state, action) => {
+        state.subCategoryStatus = 'succeeded';
+        state.subCategoryData = action.payload;
+        state.spinItem = false;
+      })
+      .addCase(createSubcategory.rejected, (state, action) => {
+        state.subCategoryStatus = 'failed';
+        state.error = action.error.message;
+        state.spinItem = false;
+      })
   },
 });
 
